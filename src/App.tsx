@@ -7,9 +7,6 @@ import {
 } from '@foronered/web/lib/theme/theme'
 import { Home } from 'pages/Home'
 import { Scaffold } from 'Scaffold'
-import { Angebot } from 'pages/Angebot'
-import { UeberUns } from 'pages/UeberUns'
-import { Kontakt } from 'pages/Kontakt'
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -64,9 +61,9 @@ export const App = () => {
           <Scaffold>
             <Routes>
               <Route path={'/'} element={<Home />} />
-              <Route path={'/angebot'} element={<Angebot />} />
+              {/* <Route path={'/angebot'} element={<Angebot />} />
               <Route path={'/ueber-uns'} element={<UeberUns />} />
-              <Route path={'/kontakt'} element={<Kontakt />} />
+              <Route path={'/kontakt'} element={<Kontakt />} /> */}
             </Routes>
           </Scaffold>
         </BrowserRouter>
