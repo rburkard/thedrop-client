@@ -27,7 +27,7 @@ export const Home = () => {
         <img alt="drop-logo" src="logo.svg" />
       </LogoWrapper>
       <Content>
-        <Section>
+        <Section style={{ flex: '0 0 100vh' }}>
           <h3 style={{ marginBottom: 24 }}>Welcome to The Drop</h3>
           <City>
             <ContentCity>
@@ -72,17 +72,42 @@ export const Home = () => {
         </Section>
         <Section>
           <h3 style={{ marginBottom: 40 }}>How can I join?</h3>
-          <h4 style={{ textAlign: 'center' }}>
+          <h4 style={{ textAlign: 'center', marginBottom: 56 }}>
             The Drop is only for the best of the best. Solve our Riddle #1 to
             get your access token.
           </h4>
+          <h4 style={{ marginBottom: 16 }}>I hide in the dark:</h4>
+          <input
+            style={{
+              border: `1px solid ${customColors.blue}`,
+              borderRadius: 10,
+              textAlign: 'center',
+            }}
+          ></input>
         </Section>
         <Section style={{ backgroundColor: 'black' }}>
-          <h3 style={{ marginBottom: 40 }}>Riddle #1</h3>
-          <h4 style={{ textAlign: 'center' }}>
-            The Drop is only for the best of the best. Solve our first riddle to
-            get your access token.
-          </h4>
+          <div
+            style={{
+              display: 'flex',
+              flex: '0 0 100px',
+              height: 100,
+              overflow: 'hidden',
+              marginRight: 100,
+            }}
+          >
+            <div
+              style={{
+                width: 50,
+                height: 100,
+                overflowX: 'scroll',
+              }}
+            >
+              <p>
+                Just try to find me, I am faster than you and will stay hidden
+                here... Oh no you got me, damn. Copy me over to win riddle #1 🥷
+              </p>
+            </div>
+          </div>
         </Section>
       </Content>
     </Wrapper>
@@ -110,15 +135,8 @@ const LogoWrapper = styled.div`
   top: 40px;
   z-index: 99;
 
-  ${DESKTOP_STYLE}  {
-    right: 40px;
-    top: 40px;
-  }
-
-  ${MOBILE_STYLE} {
-    right: -30px;
-    top: 10px;
-  }
+  right: 40px;
+  top: 40px;
 `
 
 const Content = styled.div`
