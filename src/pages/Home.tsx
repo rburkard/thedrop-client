@@ -4,11 +4,9 @@ import styled from 'styled-components'
 import { SiMinds } from 'react-icons/si'
 import { GiRunningNinja } from 'react-icons/gi'
 import { customColors } from 'constants/colors'
-import { Parallax, useParallax } from 'react-scroll-parallax'
 
 export const Home = () => {
   // const [currentQuote, setCurrentQuote] = useState<string>()
-  const [hovering, setHovering] = useState(false)
 
   const cities = ['Athens', 'Barcelona', 'San Jose', 'Züri']
   const [city, setCity] = useState(0)
