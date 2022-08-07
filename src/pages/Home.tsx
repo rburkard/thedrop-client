@@ -95,7 +95,7 @@ export const Home = () => {
               marginRight: 100,
             }}
           >
-            <div
+            <Wrap
               style={{
                 width: 50,
                 height: 100,
@@ -106,7 +106,7 @@ export const Home = () => {
                 Just try to find me, I am faster than you and will stay hidden
                 here... Oh no you got me, damn. Copy me over to win riddle #1 🥷
               </p>
-            </div>
+            </Wrap>
           </div>
         </Section>
       </Content>
@@ -249,5 +249,15 @@ const NinjaWrapper = styled.div`
     100% {
       transform: translate3d(0px, 0px, 0px);
     }
+  }
+`
+
+const Wrap = styled.div`
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
   }
 `
