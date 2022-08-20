@@ -1,3 +1,4 @@
 export const customColors = {
-  blue: '#BFCCFB',
+  blue: '#004C92',
+  blueBright: '#005CB1',
 }

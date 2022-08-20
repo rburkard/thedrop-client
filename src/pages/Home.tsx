@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { SiMinds } from 'react-icons/si'
 import { GiRunningNinja } from 'react-icons/gi'
 import { customColors } from 'constants/colors'
+import { BsInstagram } from 'react-icons/bs'
 
 export const Home = () => {
   // const [currentQuote, setCurrentQuote] = useState<string>()
@@ -17,9 +18,76 @@ export const Home = () => {
     }
   })
 
-  // const parallax = useParallax({
-  //   speed: -10,
-  // })
+  const [answer, setAnswer] = useState<string>()
+  const [email, setEmail] = useState<string>()
+
+  const [correct, setCorrect] = useState()
+  const [token, setToken] = useState<string>()
+  const [submitCount, setSubmitCount] = useState(0)
+
+  const [disabled, setDisabled] = useState(false)
+
+  const url = 'http://localhost:3001/api/post_solution'
+  const urlEmail = 'http://localhost:3001/api/post_email'
+
+  const sleep = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms))
+
+  useEffect(() => {
+    if (correct === false) {
+      const disableButton = async () => {
+        setDisabled(true)
+        await sleep(4000)
+        setDisabled(false)
+        setCorrect(undefined)
+      }
+
+      disableButton()
+    }
+  }, [submitCount, correct])
+
+  const handleSubmit = async () => {
+    setSubmitCount(submitCount + 1)
+    console.log('submit launched')
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          answer: answer,
+          email: email || 'No email provided',
+        }),
+      })
+
+      const json = await res.json()
+
+      setCorrect(json.correct)
+      setToken(json.token)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSubmitEmail = async () => {
+    try {
+      fetch(urlEmail, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          answer: answer,
+          email: email || 'No email provided',
+          correct: correct,
+          hint: correct === false ? true : false,
+        }),
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Wrapper>
@@ -76,14 +144,94 @@ export const Home = () => {
             The Drop is only for the best of the best. Solve our Riddle #1 to
             get your access token.
           </h4>
-          <h4 style={{ marginBottom: 16 }}>I hide in the dark:</h4>
-          <input
-            style={{
-              border: `1px solid ${customColors.blue}`,
-              borderRadius: 10,
-              textAlign: 'center',
-            }}
-          ></input>
+          <>
+            <h4 style={{ marginBottom: 16 }}>I hide in the dark:</h4>
+            <input
+              onChange={(event) => {
+                setAnswer(event.target.value)
+              }}
+              style={{
+                border: `1px solid ${customColors.blue}`,
+                borderRadius: 4,
+                textAlign: 'center',
+                marginBottom: 16,
+                width: 200,
+                height: 32,
+              }}
+            />
+            {!correct && (
+              <Button disabled={disabled} onClick={() => handleSubmit()}>
+                <h4 style={{ color: 'white' }}>Submit</h4>
+              </Button>
+            )}
+            {correct === true && (
+              <>
+                <p>
+                  Welcome to the club, here is your token to login to the app:
+                </p>
+                <h3 style={{ color: customColors.blue, margin: '8px 0px' }}>
+                  {token}
+                </h3>
+                <p style={{ marginBottom: 16 }}>
+                  Our app is coming soon, follow us on insta for the latest news
+                </p>
+                <a href="https://www.instagram.com/thedrop.zurich/">
+                  <BsInstagram size={32} />
+                </a>
+                <p style={{ marginBottom: 24, marginTop: 24 }}>
+                  We love to connect with fellow game enthusiasts, tell us your
+                  email if you want:
+                </p>
+                <>
+                  <input
+                    onChange={(event) => {
+                      setEmail(event.target.value)
+                    }}
+                    style={{
+                      border: `1px solid ${customColors.blue}`,
+                      borderRadius: 4,
+                      textAlign: 'center',
+                      marginBottom: 16,
+                      width: 200,
+                      height: 32,
+                    }}
+                  />
+                  <Button onClick={() => handleSubmitEmail()}>
+                    <h4 style={{ color: 'white' }}>Submit email</h4>
+                  </Button>
+                </>
+              </>
+            )}
+            {correct === false ? (
+              submitCount >= 3 ? (
+                <>
+                  <p style={{ marginBottom: 16 }}>
+                    Drop your email to get a hint
+                  </p>
+                  <input
+                    onChange={(event) => {
+                      setEmail(event.target.value)
+                    }}
+                    style={{
+                      border: `1px solid ${customColors.blue}`,
+                      borderRadius: 4,
+                      textAlign: 'center',
+                      marginBottom: 16,
+                      width: 200,
+                      height: 32,
+                    }}
+                  />
+                  <Button onClick={() => handleSubmitEmail()}>
+                    <h4 style={{ color: 'white' }}>Submit email</h4>
+                  </Button>
+                </>
+              ) : (
+                <p>Nope. You won't catch me, but keep trying</p>
+              )
+            ) : (
+              <></>
+            )}
+          </>
         </Section>
         <Section style={{ backgroundColor: 'black' }}>
           <div
@@ -259,5 +407,26 @@ const Wrap = styled.div`
 
   ::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
+  }
+`
+
+const Button = styled.button`
+  display: flex;
+  flex: 0 0 32px;
+  width: 140px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${customColors.blue};
+  background: ${customColors.blue};
+  border-radius: 4px;
+  margin-bottom: 40px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${customColors.blueBright};
+  }
+
+  :disabled {
+    background-color: grey;
   }
 `
