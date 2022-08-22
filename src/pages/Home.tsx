@@ -27,8 +27,8 @@ export const Home = () => {
 
   const [disabled, setDisabled] = useState(false)
 
-  const url = 'http://localhost:3001/api/post_solution'
-  const urlEmail = 'http://localhost:3001/api/post_email'
+  const url = 'https://romanverse.forone.red/api/post_solution'
+  const urlEmail = 'https://romanverse.forone.red/api/post_email'
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms))
