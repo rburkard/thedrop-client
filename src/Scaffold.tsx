@@ -71,6 +71,7 @@ const Wrapper = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 `
 const OverlayIcons = styled.div`
   position: absolute;
