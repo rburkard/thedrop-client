@@ -48,7 +48,6 @@ export const Home = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  flex: 1;
   align-items: center;
   flex-direction: column;
   overflow: hidden;

@@ -55,7 +55,7 @@ export const Scaffold = (props: { children: ReactNode }) => {
                 height: 64,
                 position: 'absolute',
                 top: Math.random() * 2000,
-                left: Math.random() * window.innerWidth,
+                left: Math.random() * window.innerWidth - 80,
               }}
             />
           ))}
