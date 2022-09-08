@@ -66,7 +66,7 @@ const TopoTop = styled.img`
 const TopoBottom = styled.img`
   width: 100%;
   object-fit: cover;
-  max-height: 320px;
+  max-height: 120px;
   object-position: 50% 0;
   margin-top: 64px;
   z-index: 100;
