@@ -34,4 +34,6 @@ const Overlay = styled.div`
   flex-direction: column;
   padding: 100px 64px;
   gap: 32px;
+  transition-property: all;
+  transition-duration: 1s;
 `

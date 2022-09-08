@@ -19,11 +19,13 @@ export const RiddleCore = () => {
   const [token, setToken] = useState<string>()
   const [submitCount, setSubmitCount] = useState(0)
 
+  const [disabled, setDisabled] = useState(false)
+
   const url = 'https://romanverse.forone.red/api/post_solution'
   const urlEmail = 'https://romanverse.forone.red/api/post_email'
 
   useEffect(() => {
-    if (correct) {
+    if (correct === true) {
       setRiddleState(RiddleState.Correct)
     }
     if (correct === false) {
@@ -32,7 +34,7 @@ export const RiddleCore = () => {
   }, [correct])
 
   useEffect(() => {
-    if (riddleState === RiddleState.Wrong) {
+    if (riddleState === RiddleState.Wrong && submitCount <= 5) {
       setTimeout(() => {
         setSubmitCount(submitCount + 1)
         setRiddleState(RiddleState.Initial)
@@ -43,6 +45,7 @@ export const RiddleCore = () => {
   const handleSubmit = async () => {
     setSubmitCount(submitCount + 1)
     try {
+      setDisabled(true)
       const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -58,6 +61,7 @@ export const RiddleCore = () => {
 
       setCorrect(json.correct)
       setToken(json.token)
+      setDisabled(false)
     } catch (err) {
       console.log(err)
     }
@@ -65,6 +69,7 @@ export const RiddleCore = () => {
 
   const handleSubmitEmail = async () => {
     try {
+      setDisabled(true)
       fetch(urlEmail, {
         method: 'POST',
         headers: {
@@ -77,6 +82,7 @@ export const RiddleCore = () => {
           hint: correct === false ? true : false,
         }),
       })
+      setDisabled(false)
     } catch (err) {
       console.log(err)
     }
@@ -85,7 +91,9 @@ export const RiddleCore = () => {
   switch (riddleState) {
     case RiddleState.Initial:
       return (
-        <>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', minHeight: 300 }}
+        >
           <Row>
             <h3 style={{ fontWeight: 'bold' }}>How can I join?</h3>
             <p>
@@ -101,18 +109,29 @@ export const RiddleCore = () => {
               }}
             />
           </Row>
-          <Button onClick={() => handleSubmit()}>
+          <Button onClick={() => handleSubmit()} disabled={disabled}>
             <h4 style={{ color: 'white' }}>Submit</h4>
           </Button>
-        </>
+        </div>
       )
     case RiddleState.Wrong:
       return (
-        <>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', minHeight: 300 }}
+        >
           {submitCount < 5 ? (
             <>
               <Row>
                 <p>Wrong answer, try again.</p>
+              </Row>
+              <Row>
+                <p>
+                  Our greatest glory is not in never falling, but in rising
+                  every time we fall.
+                </p>
+              </Row>
+              <Row>
+                <p>You go tiger!</p>
               </Row>
             </>
           ) : (
@@ -122,18 +141,20 @@ export const RiddleCore = () => {
                   Hey don't worry, its a very hard riddle. Enter your email and
                   get a hint if you want.
                 </p>
+              </Row>
+              <Row>
                 <Input
                   onChange={(event) => {
                     setEmail(event.target.value)
                   }}
                 />
               </Row>
-              <Button onClick={() => handleSubmitEmail()}>
+              <Button onClick={() => handleSubmitEmail()} disabled={disabled}>
                 <h4 style={{ color: 'white' }}>Submit</h4>
               </Button>
             </>
           )}
-        </>
+        </div>
       )
 
     case RiddleState.Correct:
@@ -144,12 +165,19 @@ export const RiddleCore = () => {
               Oooh yeah - Welcome to the club, here is your token for our App
             </p>
           </Row>
-          <Row style={{ border: '1px solid white', borderRadius: 5 }}>
-            {token}
+          <Row
+            style={{
+              border: '1px solid white',
+              borderRadius: 5,
+              padding: 8,
+            }}
+          >
+            <h3 style={{ color: 'orange' }}>{token}</h3>
           </Row>
           <Row>
             <p style={{ marginBottom: 16 }}>
-              Our app is coming soon, follow us on insta for the latest news
+              Our App is coming next week, follow us on insta for the latest
+              news
             </p>
             <a href="https://www.instagram.com/thedrop.zurich/">
               <BsInstagram size={32} />
@@ -175,10 +203,12 @@ const Input = styled.input`
 const Button = styled.button`
   all: unset;
   display: flex;
+  cursor: pointer;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   background-color: #847a55;
   width: 100%;
   height: 40px;
+  z-index: 20;
 `
