@@ -131,7 +131,9 @@ export const RiddleCore = () => {
       return (
         <>
           <Row>
-            <p>Welcome to the club, here is your token to login to the app:</p>
+            <p>
+              Oooh yeah - Welcome to the club, here is your token for our App
+            </p>
           </Row>
           <Row style={{ border: '1px solid white', borderRadius: 5 }}>
             {token}
