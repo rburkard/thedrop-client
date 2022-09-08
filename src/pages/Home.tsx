@@ -1,5 +1,3 @@
-import { DESKTOP_STYLE, MOBILE_STYLE } from 'constants/variables'
-import { OneIcon } from 'Icons'
 import styled from 'styled-components'
 
 export const Home = () => {

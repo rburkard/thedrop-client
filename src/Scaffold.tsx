@@ -1,5 +1,5 @@
 import { MOBILE_BREAKPOINT_N } from 'constants/variables'
-import { Objects, OneIcon } from 'Icons'
+import { Objects } from 'Icons'
 import {
   createContext,
   ReactNode,
