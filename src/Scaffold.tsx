@@ -47,19 +47,6 @@ export const Scaffold = (props: { children: ReactNode }) => {
             objectFit: 'cover',
           }}
         />
-        <OverlayIcons>
-          {Objects.map((Icon) => (
-            <Icon
-              style={{
-                width: 64,
-                height: 64,
-                position: 'absolute',
-                top: Math.random() * 2000,
-                left: Math.random() * window.innerWidth - 80,
-              }}
-            />
-          ))}
-        </OverlayIcons>
         <Overlay>{props.children}</Overlay>
       </Wrapper>
     </IsMobile.Provider>
@@ -72,14 +59,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-`
-const OverlayIcons = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  z-index: 10;
 `
 
 const Overlay = styled.div`
