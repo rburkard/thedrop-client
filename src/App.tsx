@@ -26,14 +26,21 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, p, a {
-    font-family: 'Quicksand', sans-serif !important;
+    font-family: 'Courier Prime', monospace !important;
     margin: 0;
     text-decoration: none;
-    color: black;
+    color: white;
+    text-transform: uppercase;
   }
 
-  p {
-    line-height: 1.5;
+  h3 {
+    font-size: 28px;
+  }
+  p, input {
+    all: unset;
+    font-size: 24px;
+    color: white;
+    margin: 0;
   }
 
   * {
