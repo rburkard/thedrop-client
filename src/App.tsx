@@ -34,11 +34,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
-    font-size: 28px;
+    font-size: 22px;
   }
   p, input {
     all: unset;
-    font-size: 24px;
+    font-size: 18px;
     color: white;
     margin: 0;
   }
