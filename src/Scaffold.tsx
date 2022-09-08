@@ -1,4 +1,5 @@
 import { MOBILE_BREAKPOINT_N } from 'constants/variables'
+import { Objects, OneIcon } from 'Icons'
 import {
   createContext,
   ReactNode,
@@ -6,13 +7,14 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { ParallaxProvider } from 'react-scroll-parallax'
+import styled from 'styled-components'
 
 export const useIsMobile = (): boolean => {
   const dataView = useContext(IsMobile)
   return dataView
 }
 
+console.log(Objects)
 const IsMobile = createContext<boolean>(false)
 
 IsMobile.displayName = 'IsMobile'
@@ -35,7 +37,55 @@ export const Scaffold = (props: { children: ReactNode }) => {
 
   return (
     <IsMobile.Provider value={!!isMobile}>
-      <ParallaxProvider>{props.children}</ParallaxProvider>
+      <Wrapper>
+        <img
+          src={'./backgroundAssets/paper.png'}
+          alt={'background paper'}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            objectFit: 'cover',
+          }}
+        />
+        <OverlayIcons>
+          {Objects.map((Icon) => (
+            <Icon
+              style={{
+                width: 64,
+                height: 64,
+                position: 'absolute',
+                top: Math.random() * 2000,
+                left: Math.random() * window.innerWidth,
+              }}
+            />
+          ))}
+        </OverlayIcons>
+        <Overlay>{props.children}</Overlay>
+      </Wrapper>
     </IsMobile.Provider>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+`
+const OverlayIcons = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  z-index: 10;
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  z-index: 3;
+`
