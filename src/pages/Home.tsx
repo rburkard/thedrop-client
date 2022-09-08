@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   flex: 1;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 `
 
 const Tape = styled.img`
