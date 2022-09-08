@@ -47,6 +47,15 @@ export const Scaffold = (props: { children: ReactNode }) => {
             objectFit: 'cover',
           }}
         />
+        <img
+          src={'./backgroundAssets/lines.png'}
+          alt={'backround lines'}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            objectFit: 'cover',
+          }}
+        />
         <Overlay>{props.children}</Overlay>
       </Wrapper>
     </IsMobile.Provider>

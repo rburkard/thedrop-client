@@ -1,5 +1,5 @@
-import { TextBoxComponent } from 'components/TextBoxComponent'
-import { TextBoxLongComponent } from 'components/TextBoxLongComponent'
+import { IntroTextBox } from 'components/IntroTextBox'
+import { RiddleTextBox } from 'components/RiddleTextBox'
 import { Objects } from 'Icons'
 import styled from 'styled-components'
 
@@ -9,8 +9,8 @@ export const Home = () => {
       <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
       <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
-      <TextBoxComponent />
-      <TextBoxLongComponent />
+      <IntroTextBox />
+      <RiddleTextBox />
       <TopoBottom
         src={'./backgroundAssets/topoBottom.png'}
         alt={'topography bottom'}
@@ -66,7 +66,7 @@ const TopoTop = styled.img`
 const TopoBottom = styled.img`
   width: 100%;
   object-fit: cover;
-  max-height: 120px;
+  max-height: 160px;
   object-position: 50% 0;
   margin-top: 64px;
   z-index: 100;
