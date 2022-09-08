@@ -9,7 +9,7 @@ enum RiddleState {
 }
 
 export const RiddleCore = () => {
-  const [riddleState, setRiddleState] = useState(RiddleState.Correct)
+  const [riddleState, setRiddleState] = useState(RiddleState.Initial)
 
   const [answer, setAnswer] = useState<string>()
   const [email, setEmail] = useState<string>()
@@ -21,6 +21,15 @@ export const RiddleCore = () => {
 
   const url = 'https://romanverse.forone.red/api/post_solution'
   const urlEmail = 'https://romanverse.forone.red/api/post_email'
+
+  useEffect(() => {
+    if (correct) {
+      setRiddleState(RiddleState.Correct)
+    }
+    if (correct === false) {
+      setRiddleState(RiddleState.Wrong)
+    }
+  }, [correct])
 
   useEffect(() => {
     if (riddleState === RiddleState.Wrong) {
