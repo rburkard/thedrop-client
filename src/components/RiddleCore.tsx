@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BsInstagram } from 'react-icons/bs'
 import styled from 'styled-components'
+import { Riddle } from './Riddle'
 
 enum RiddleState {
   Initial = 'Initial',
@@ -92,7 +93,7 @@ export const RiddleCore = () => {
     case RiddleState.Initial:
       return (
         <div
-          style={{ display: 'flex', flexDirection: 'column', minHeight: 300 }}
+          style={{ display: 'flex', flexDirection: 'column', minHeight: 360 }}
         >
           <Row>
             <h3 style={{ fontWeight: 'bold' }}>How can I join?</h3>
@@ -102,11 +103,12 @@ export const RiddleCore = () => {
             </p>
           </Row>
           <Row>
-            <p>I hide in the dark.</p>
+            <Riddle />
             <Input
               onChange={(event) => {
                 setAnswer(event.target.value)
               }}
+              placeholder={'Your answer here..'}
             />
           </Row>
           <Button onClick={() => handleSubmit()} disabled={disabled}>
@@ -117,7 +119,7 @@ export const RiddleCore = () => {
     case RiddleState.Wrong:
       return (
         <div
-          style={{ display: 'flex', flexDirection: 'column', minHeight: 300 }}
+          style={{ display: 'flex', flexDirection: 'column', minHeight: 360 }}
         >
           {submitCount < 5 ? (
             <>
@@ -183,6 +185,20 @@ export const RiddleCore = () => {
               <BsInstagram size={32} />
             </a>
           </Row>
+          <Row>
+            <p>
+              We love to connect with fellow game enthusiasts. Enter your email
+              if you want.
+            </p>
+            <Input
+              onChange={(event) => {
+                setEmail(event.target.value)
+              }}
+            />
+          </Row>
+          <Button onClick={() => handleSubmitEmail()} disabled={disabled}>
+            <h4 style={{ color: 'white' }}>Submit</h4>
+          </Button>
         </>
       )
   }

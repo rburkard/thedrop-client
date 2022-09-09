@@ -36,7 +36,13 @@ export const GlobalStyle = createGlobalStyle`
   h3 {
     font-size: 22px;
   }
-  p, input {
+  p {
+    font-size: 18px;
+    color: white;
+    margin: 0;
+  }
+
+  input {
     all: unset;
     font-size: 18px;
     color: white;
