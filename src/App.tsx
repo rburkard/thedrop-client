@@ -45,8 +45,12 @@ export const GlobalStyle = createGlobalStyle`
   input {
     all: unset;
     font-size: 18px;
-    color: white;
     margin: 0;
+    font-family: 'Courier Prime', monospace !important;
+    margin: 0;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
   }
 
   * {

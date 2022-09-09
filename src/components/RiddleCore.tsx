@@ -8,6 +8,7 @@ enum RiddleState {
   Initial = 'Initial',
   Correct = 'Correct',
   Wrong = 'Wrong',
+  Done = 'Done',
 }
 
 export const RiddleCore = (props: {
@@ -18,11 +19,10 @@ export const RiddleCore = (props: {
 
   const [answer, setAnswer] = useState<string>()
   const [email, setEmail] = useState<string>()
-
-  console.log(answer)
   const [correct, setCorrect] = useState()
   const [token, setToken] = useState<string>()
   const [submitCount, setSubmitCount] = useState(0)
+  const [emailSubmitted, setEmailSubmitted] = useState(false)
 
   const [disabled, setDisabled] = useState(false)
 
@@ -30,27 +30,31 @@ export const RiddleCore = (props: {
   const urlEmail = 'https://romanverse.forone.red/api/post_email'
 
   useEffect(() => {
-    if (correct === true) {
+    if (correct === true && emailSubmitted) {
+      setRiddleState(RiddleState.Done)
+    }
+    if (correct === true && !emailSubmitted) {
       setRiddleState(RiddleState.Correct)
     }
     if (correct === false) {
       setRiddleState(RiddleState.Wrong)
     }
-  }, [correct])
+  }, [correct, emailSubmitted, riddleState])
 
   useEffect(() => {
     if (riddleState === RiddleState.Wrong && submitCount <= 5) {
       setTimeout(() => {
         setSubmitCount(submitCount + 1)
         setRiddleState(RiddleState.Initial)
+        setCorrect(undefined)
       }, 4000)
     }
   }, [riddleState, submitCount])
 
   const handleSubmit = async () => {
     setSubmitCount(submitCount + 1)
+    setDisabled(true)
     try {
-      setDisabled(true)
       const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -66,15 +70,16 @@ export const RiddleCore = (props: {
 
       setCorrect(json.correct)
       setToken(json.token)
-      setDisabled(false)
     } catch (err) {
       console.log(err)
     }
+    setDisabled(false)
   }
 
   const handleSubmitEmail = async () => {
+    setDisabled(true)
+    setEmailSubmitted(true)
     try {
-      setDisabled(true)
       fetch(urlEmail, {
         method: 'POST',
         headers: {
@@ -87,10 +92,10 @@ export const RiddleCore = (props: {
           hint: correct === false ? true : false,
         }),
       })
-      setDisabled(false)
     } catch (err) {
       console.log(err)
     }
+    setDisabled(false)
   }
 
   switch (riddleState) {
@@ -216,6 +221,15 @@ export const RiddleCore = (props: {
           </Button>
         </>
       )
+
+    case RiddleState.Done:
+      return (
+        <>
+          <Row>
+            <p>See you next week at 18:00 in the app!</p>
+          </Row>
+        </>
+      )
   }
 }
 
@@ -243,4 +257,8 @@ const Button = styled.button`
   width: 100%;
   height: 40px;
   z-index: 20;
+
+  :disabled {
+    opacity: 0.3;
+  }
 `
