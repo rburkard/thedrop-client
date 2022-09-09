@@ -1,12 +1,18 @@
 import styled from 'styled-components'
 import { RiddleCore } from './RiddleCore'
 
-export const RiddleTextBox = () => {
+export const RiddleTextBox = (props: {
+  setRiddleFullscreen: (v: boolean) => void
+  riddleFullscreen: boolean
+}) => {
   return (
     <TextBoxLong>
       <TextBoxImg src={'./assets/textBoxLongBackground.png'} />
       <Overlay>
-        <RiddleCore />
+        <RiddleCore
+          setRiddleFullscreen={props.setRiddleFullscreen}
+          riddleFullscreen={props.riddleFullscreen}
+        />
       </Overlay>
     </TextBoxLong>
   )

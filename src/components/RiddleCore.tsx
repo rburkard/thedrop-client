@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BsInstagram } from 'react-icons/bs'
+import { ImEnlarge2 } from 'react-icons/im'
 import styled from 'styled-components'
 import { Riddle } from './Riddle'
 
@@ -9,7 +10,10 @@ enum RiddleState {
   Wrong = 'Wrong',
 }
 
-export const RiddleCore = () => {
+export const RiddleCore = (props: {
+  setRiddleFullscreen: (v: boolean) => void
+  riddleFullscreen: boolean
+}) => {
   const [riddleState, setRiddleState] = useState(RiddleState.Initial)
 
   const [answer, setAnswer] = useState<string>()
@@ -103,6 +107,16 @@ export const RiddleCore = () => {
             </p>
           </Row>
           <Row>
+            <div
+              style={{
+                position: 'absolute',
+                top: 64,
+                right: 64,
+              }}
+              onClick={() => props.setRiddleFullscreen(true)}
+            >
+              <ImEnlarge2 color={'white'} size={24} />
+            </div>
             <Riddle />
             <Input
               onChange={(event) => {
@@ -214,6 +228,7 @@ const Row = styled.div`
 const Input = styled.input`
   border-bottom: 2px solid white;
   padding: 8px;
+  margin: 16px 0px;
 `
 
 const Button = styled.button`

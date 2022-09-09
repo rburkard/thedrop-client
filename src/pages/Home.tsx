@@ -1,16 +1,43 @@
 import { IntroTextBox } from 'components/IntroTextBox'
+import { Riddle } from 'components/Riddle'
 import { RiddleTextBox } from 'components/RiddleTextBox'
 import { Objects } from 'Icons'
+import { useState } from 'react'
 import styled from 'styled-components'
+import { AiOutlineClose } from 'react-icons/ai'
 
 export const Home = () => {
+  const [riddleFullscreen, setRiddleFullScreen] = useState(false)
   return (
     <Wrapper>
+      {riddleFullscreen && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            position: 'fixed',
+            zIndex: 500,
+            backgroundColor: '#5A5973',
+            height: '100%',
+          }}
+        >
+          <div
+            style={{ position: 'absolute', top: 20, right: 20 }}
+            onClick={() => setRiddleFullScreen(false)}
+          >
+            <AiOutlineClose color={'white'} size={40} />
+          </div>
+          <Riddle />
+        </div>
+      )}
       <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
       <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
       <IntroTextBox />
-      <RiddleTextBox />
+      <RiddleTextBox
+        riddleFullscreen={riddleFullscreen}
+        setRiddleFullscreen={setRiddleFullScreen}
+      />
       <TopoBottom
         src={'./backgroundAssets/topoBottom.png'}
         alt={'topography bottom'}
