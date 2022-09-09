@@ -9,6 +9,7 @@ enum RiddleState {
   Correct = 'Correct',
   Wrong = 'Wrong',
   Done = 'Done',
+  Lost = 'Lost',
 }
 
 export const RiddleCore = (props: {
@@ -30,6 +31,9 @@ export const RiddleCore = (props: {
   const urlEmail = 'https://romanverse.forone.red/api/post_email'
 
   useEffect(() => {
+    if (!correct && emailSubmitted) {
+      setRiddleState(RiddleState.Lost)
+    }
     if (correct === true && emailSubmitted) {
       setRiddleState(RiddleState.Done)
     }
@@ -227,6 +231,15 @@ export const RiddleCore = (props: {
         <>
           <Row>
             <p>See you next week at 18:00 in the app!</p>
+          </Row>
+        </>
+      )
+
+    case RiddleState.Lost:
+      return (
+        <>
+          <Row>
+            <p>Well email you, stay tuned!</p>
           </Row>
         </>
       )
