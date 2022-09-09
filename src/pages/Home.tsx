@@ -19,6 +19,7 @@ export const Home = () => {
             zIndex: 500,
             backgroundColor: '#5A5973',
             height: '100%',
+            width: '100%',
           }}
         >
           <div
