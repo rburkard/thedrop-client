@@ -51,7 +51,7 @@ export const RiddleCore = (props: {
         setSubmitCount(submitCount + 1)
         setRiddleState(RiddleState.Initial)
         setCorrect(undefined)
-      }, 4000)
+      }, 2000)
     }
   }, [riddleState, submitCount])
 
