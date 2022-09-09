@@ -112,6 +112,7 @@ export const RiddleCore = (props: {
                 position: 'absolute',
                 top: 64,
                 right: 64,
+                cursor: 'pointer',
               }}
               onClick={() => props.setRiddleFullscreen(true)}
             >

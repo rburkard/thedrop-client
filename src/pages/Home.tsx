@@ -22,7 +22,12 @@ export const Home = () => {
           }}
         >
           <div
-            style={{ position: 'absolute', top: 20, right: 20 }}
+            style={{
+              position: 'absolute',
+              top: 20,
+              right: 20,
+              cursor: 'pointer',
+            }}
             onClick={() => setRiddleFullScreen(false)}
           >
             <AiOutlineClose color={'white'} size={40} />
