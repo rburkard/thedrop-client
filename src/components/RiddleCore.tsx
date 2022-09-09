@@ -205,7 +205,7 @@ export const RiddleCore = (props: {
               Our App is coming next week, follow us on insta for the latest
               news
             </p>
-            <a href="https://www.instagram.com/thedrop.zurich/">
+            <a href="https://www.instagram.com/thedrop.live/">
               <BsInstagram size={32} />
             </a>
           </Row>
