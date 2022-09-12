@@ -41,13 +41,23 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h3 {
-    font-size: 28px;
+    font-size: 22px;
   }
-  p, input {
-    all: unset;
-    font-size: 24px;
+  p {
+    font-size: 18px;
     color: white;
     margin: 0;
+  }
+
+  input {
+    all: unset;
+    font-size: 18px;
+    margin: 0;
+    font-family: 'Courier Prime', monospace !important;
+    margin: 0;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
   }
 
   * {

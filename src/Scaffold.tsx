@@ -1,5 +1,5 @@
 import { MOBILE_BREAKPOINT_N } from 'constants/variables'
-import { Objects, OneIcon } from 'Icons'
+import { Objects } from 'Icons'
 import {
   createContext,
   ReactNode,
@@ -47,19 +47,15 @@ export const Scaffold = (props: { children: ReactNode }) => {
             objectFit: 'cover',
           }}
         />
-        <OverlayIcons>
-          {Objects.map((Icon) => (
-            <Icon
-              style={{
-                width: 64,
-                height: 64,
-                position: 'absolute',
-                top: Math.random() * 2000,
-                left: Math.random() * window.innerWidth,
-              }}
-            />
-          ))}
-        </OverlayIcons>
+        <img
+          src={'./backgroundAssets/lines.png'}
+          alt={'backround lines'}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            objectFit: 'cover',
+          }}
+        />
         <Overlay>{props.children}</Overlay>
       </Wrapper>
     </IsMobile.Provider>
@@ -71,14 +67,7 @@ const Wrapper = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-`
-const OverlayIcons = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  z-index: 10;
+  overflow: hidden;
 `
 
 const Overlay = styled.div`
