@@ -19,7 +19,7 @@ export const Riddle = () => {
               alt={'riddletag'}
               style={{ objectFit: 'contain', width: '100%' }}
             />
-            <p>{item.label}</p>
+            <p style={{ color: 'black' }}>{item.label}</p>
           </ImgWrapper>
         </Column>
       ))}
@@ -32,6 +32,7 @@ const Wrapper = styled.div`
   border: 1px solid white;
   border-radius: 5px;
   padding: 16px;
+  background-color: white;
 `
 
 const Column = styled.div`

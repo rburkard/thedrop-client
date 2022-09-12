@@ -15,6 +15,7 @@ export const Home = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             position: 'fixed',
             zIndex: 500,
             backgroundColor: '#5A5973',
