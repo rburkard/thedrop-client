@@ -1,12 +1,9 @@
-import { IntroTextBox } from 'components/IntroTextBox'
 import { Riddle } from 'components/Riddle'
-import { RiddleTextBox } from 'components/RiddleTextBox'
+import { WeeklyRiddleTextBox } from 'components/WeeklyRiddleTextBox'
 import { Objects } from 'Icons'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { AiOutlineClose } from 'react-icons/ai'
-import { LoginTextBox } from 'components/LoginTextBox'
-import { WeeklyRiddleTextBox } from 'components/WeeklyRiddleTextBox'
+import styled from 'styled-components'
 
 export const RiddlePage = () => {
   useEffect(() => {
@@ -77,27 +74,11 @@ const Wrapper = styled.div`
   overflow: hidden;
 `
 
-const Tape = styled.img`
-  object-fit: contain;
-  margin-top: 56px;
-  width: 280px;
-  max-width: '100%';
-  z-index: 2;
-`
-
 const Logo = styled.img`
   object-fit: contain;
   width: 100%;
   max-width: 600px;
   z-index: 2;
-`
-
-const TopoTop = styled.img`
-  object-fit: cover;
-  object-position: 50% 0;
-  margin: 64px 0px;
-  z-index: 0;
-  width: 100%;
 `
 
 const TopoBottom = styled.img`

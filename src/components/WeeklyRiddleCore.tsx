@@ -17,11 +17,9 @@ export const WeeklyRiddleCore = (props: {
   const [riddleState, setRiddleState] = useState(RiddleState.Initial)
 
   const [answer, setAnswer] = useState<string>()
-  const [email, setEmail] = useState<string>()
   const [correct, setCorrect] = useState()
   const [token, setToken] = useState<string>()
   const [submitCount, setSubmitCount] = useState(0)
-  const [emailSubmitted, setEmailSubmitted] = useState(false)
 
   const [disabled, setDisabled] = useState(false)
 
@@ -56,19 +54,16 @@ export const WeeklyRiddleCore = (props: {
   }, [])
 
   useEffect(() => {
-    if (!correct && emailSubmitted) {
+    if (!correct) {
       setRiddleState(RiddleState.Lost)
     }
-    if (correct === true && emailSubmitted) {
-      setRiddleState(RiddleState.Done)
-    }
-    if (correct === true && !emailSubmitted) {
+    if (correct === true) {
       setRiddleState(RiddleState.Correct)
     }
     if (correct === false) {
       setRiddleState(RiddleState.Wrong)
     }
-  }, [correct, emailSubmitted, riddleState])
+  }, [correct, riddleState])
 
   useEffect(() => {
     if (riddleState === RiddleState.Wrong && submitCount <= 5) {
@@ -91,7 +86,6 @@ export const WeeklyRiddleCore = (props: {
         },
         body: JSON.stringify({
           answer: answer,
-          email: email || 'No email provided',
         }),
       })
 
