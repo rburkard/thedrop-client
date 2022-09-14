@@ -1,24 +1,18 @@
-import { LightningIcon, QuestionIcon } from 'Icons'
+import Countdown from 'react-countdown'
 import styled from 'styled-components'
 
-export const IntroTextBox = () => {
+export const CountdownTextBox = () => {
   return (
     <TextBox>
       <TextBoxImg src={'./assets/textBoxBackground.png'} />
       <Overlay>
         <Row>
-          <QuestionIcon style={{ width: 80, height: 80 }} />
-          <p>
-            Solve our riddle every Thursday at 18:00 to reveal the drop
-            location.
-          </p>
+          <h4>Next drop in:</h4>
         </Row>
         <Row>
-          <LightningIcon style={{ width: 80, height: 80 }} />
-
-          <p>
-            Beat the other players to the spinner to reveal this weeks reward.
-          </p>
+          <h3>
+            <Countdown date={1663257600000} />
+          </h3>
         </Row>
       </Overlay>
     </TextBox>
@@ -27,10 +21,11 @@ export const IntroTextBox = () => {
 
 const TextBox = styled.div`
   display: flex;
-  margin: 64px 24px;
+  margin: 80px 24px 64px 24px;
   max-width: 640px;
   position: relative;
   z-index: 3;
+  padding: 24px;
 `
 
 const TextBoxImg = styled.img`
@@ -46,11 +41,13 @@ const Overlay = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 100px 64px 80px 40px;
+  padding: 80px;
 `
 
 const Row = styled.div`
   display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 `

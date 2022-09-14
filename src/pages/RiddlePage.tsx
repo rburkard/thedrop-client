@@ -2,13 +2,17 @@ import { IntroTextBox } from 'components/IntroTextBox'
 import { Riddle } from 'components/Riddle'
 import { RiddleTextBox } from 'components/RiddleTextBox'
 import { Objects } from 'Icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineClose } from 'react-icons/ai'
 import { LoginTextBox } from 'components/LoginTextBox'
-import { CountdownTextBox } from 'components/CountdownTextBox'
+import { WeeklyRiddleTextBox } from 'components/WeeklyRiddleTextBox'
 
-export const Home = () => {
+export const RiddlePage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const [riddleFullscreen, setRiddleFullScreen] = useState(false)
   return (
     <Wrapper>
@@ -39,16 +43,11 @@ export const Home = () => {
           <Riddle />
         </div>
       )}
-      <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
-      <CountdownTextBox />
-      <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
-      <IntroTextBox />
-      <RiddleTextBox
+      <WeeklyRiddleTextBox
         riddleFullscreen={riddleFullscreen}
         setRiddleFullscreen={setRiddleFullScreen}
       />
-      <LoginTextBox />
       <TopoBottom
         src={'./backgroundAssets/topoBottom.png'}
         alt={'topography bottom'}

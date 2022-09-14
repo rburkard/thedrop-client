@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import { BsInstagram } from 'react-icons/bs'
-import { ImEnlarge2 } from 'react-icons/im'
+import Countdown from 'react-countdown'
 import styled from 'styled-components'
-import { Riddle } from './Riddle'
 
 enum RiddleState {
   Initial = 'Initial',
@@ -12,7 +10,7 @@ enum RiddleState {
   Lost = 'Lost',
 }
 
-export const RiddleCore = (props: {
+export const WeeklyRiddleCore = (props: {
   setRiddleFullscreen: (v: boolean) => void
   riddleFullscreen: boolean
 }) => {
@@ -27,8 +25,35 @@ export const RiddleCore = (props: {
 
   const [disabled, setDisabled] = useState(false)
 
-  const url = 'https://romanverse.forone.red/api/post_solution'
-  const urlEmail = 'https://romanverse.forone.red/api/post_email'
+  const fetchRiddleUrl = 'https://romanverse.forone.red/api/get_weekly_riddle'
+  const submitAnswerUrl =
+    'https://romanverse.forone.red/api/post_weekly_solution'
+  // const fetchRiddleUrl = 'http://localhost:3001/api/get_weekly_riddle'
+  // const submitAnswerUrl = 'http://localhost:3001/api/post_weekly_solution'
+
+  const [weeklyRiddle, setWeeklyRiddle] = useState('')
+
+  const fetchRiddle = async () => {
+    try {
+      const res = await fetch(fetchRiddleUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      const json = await res.json()
+
+      if (json.text !== '') {
+        setWeeklyRiddle(json.text)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    fetchRiddle()
+  }, [])
 
   useEffect(() => {
     if (!correct && emailSubmitted) {
@@ -55,11 +80,11 @@ export const RiddleCore = (props: {
     }
   }, [riddleState, submitCount])
 
-  const handleSubmit = async () => {
+  const handleSubmitAnswer = async () => {
     setSubmitCount(submitCount + 1)
     setDisabled(true)
     try {
-      const res = await fetch(url, {
+      const res = await fetch(submitAnswerUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,54 +105,27 @@ export const RiddleCore = (props: {
     setDisabled(false)
   }
 
-  const handleSubmitEmail = async () => {
-    setDisabled(true)
-    setEmailSubmitted(true)
-    try {
-      fetch(urlEmail, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          answer: answer,
-          email: email || 'No email provided',
-          correct: correct,
-          hint: correct === false ? true : false,
-        }),
-      })
-    } catch (err) {
-      console.log(err)
-    }
-    setDisabled(false)
-  }
-
   switch (riddleState) {
     case RiddleState.Initial:
-      return (
+      return weeklyRiddle === '' ? (
+        <h3>
+          <Countdown date={1663257600000} onComplete={() => fetchRiddle()} />
+        </h3>
+      ) : (
         <div
           style={{ display: 'flex', flexDirection: 'column', minHeight: 360 }}
         >
           <Row>
-            <h3 style={{ fontWeight: 'bold' }}>How can I sign up?</h3>
+            <h3 style={{ fontWeight: 'bold' }}>Welcome to Week #1</h3>
             <p>
-              The drop is only for the best of the best. Solve our Riddle #1 to
-              get access.
+              Only 14% of The Drop Players made it this far. But can you keep
+              up?
             </p>
           </Row>
           <Row>
-            <div
-              style={{
-                position: 'absolute',
-                top: 64,
-                right: 64,
-                cursor: 'pointer',
-              }}
-              onClick={() => props.setRiddleFullscreen(true)}
-            >
-              <ImEnlarge2 color={'white'} size={24} />
-            </div>
-            <Riddle />
+            <p>{weeklyRiddle}</p>
+          </Row>
+          <Row>
             <Input
               onChange={(event) => {
                 setAnswer(event.target.value)
@@ -135,7 +133,7 @@ export const RiddleCore = (props: {
               placeholder={'Your answer here..'}
             />
           </Row>
-          <Button onClick={() => handleSubmit()} disabled={disabled}>
+          <Button onClick={() => handleSubmitAnswer()} disabled={disabled}>
             <h4 style={{ color: 'white' }}>Submit</h4>
           </Button>
         </div>
@@ -145,41 +143,20 @@ export const RiddleCore = (props: {
         <div
           style={{ display: 'flex', flexDirection: 'column', minHeight: 360 }}
         >
-          {submitCount < 5 ? (
-            <>
-              <Row>
-                <p>Wrong answer, try again.</p>
-              </Row>
-              <Row>
-                <p>
-                  Our greatest glory is not in never falling, but in rising
-                  every time we fall.
-                </p>
-              </Row>
-              <Row>
-                <p>You go tiger!</p>
-              </Row>
-            </>
-          ) : (
-            <>
-              <Row>
-                <p>
-                  Hey don't worry, its a very hard riddle. Enter your email and
-                  get a hint if you want.
-                </p>
-              </Row>
-              <Row>
-                <Input
-                  onChange={(event) => {
-                    setEmail(event.target.value)
-                  }}
-                />
-              </Row>
-              <Button onClick={() => handleSubmitEmail()} disabled={disabled}>
-                <h4 style={{ color: 'white' }}>Submit</h4>
-              </Button>
-            </>
-          )}
+          <>
+            <Row>
+              <p>Wrong answer, try again.</p>
+            </Row>
+            <Row>
+              <p>
+                Our greatest glory is not in never falling, but in rising every
+                time we fall.
+              </p>
+            </Row>
+            <Row>
+              <p>You go tiger!</p>
+            </Row>
+          </>
         </div>
       )
 
@@ -188,7 +165,14 @@ export const RiddleCore = (props: {
         <>
           <Row>
             <p>
-              Oooh yeah - Welcome to the club, here is your token for our App
+              Oooh yeah - well done! This week we don't have a special drop for
+              you, but stay tuned for more!
+            </p>
+          </Row>
+          <Row>
+            <p>
+              Here is your token to continue your streak and enter next weeks
+              drop:
             </p>
           </Row>
           <Row
@@ -200,29 +184,6 @@ export const RiddleCore = (props: {
           >
             <h3 style={{ color: 'orange' }}>{token}</h3>
           </Row>
-          <Row>
-            <p style={{ marginBottom: 16 }}>
-              Our App is coming next week, follow us on insta for the latest
-              news
-            </p>
-            <a href="https://www.instagram.com/thedrop.live/">
-              <BsInstagram size={32} />
-            </a>
-          </Row>
-          <Row>
-            <p>
-              We love to connect with fellow game enthusiasts. Enter your email
-              if you want.
-            </p>
-            <Input
-              onChange={(event) => {
-                setEmail(event.target.value)
-              }}
-            />
-          </Row>
-          <Button onClick={() => handleSubmitEmail()} disabled={disabled}>
-            <h4 style={{ color: 'white' }}>Submit</h4>
-          </Button>
         </>
       )
 
