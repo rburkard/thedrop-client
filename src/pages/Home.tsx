@@ -44,11 +44,11 @@ export const Home = () => {
       <CountdownTextBox />
       <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
       <IntroTextBox />
+      <LoginTextBox />
       <RiddleTextBox
         riddleFullscreen={riddleFullscreen}
         setRiddleFullscreen={setRiddleFullScreen}
       />
-      <LoginTextBox />
       <TopoBottom
         src={'./backgroundAssets/topoBottom.png'}
         alt={'topography bottom'}
