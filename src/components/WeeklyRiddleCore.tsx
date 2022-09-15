@@ -165,9 +165,11 @@ export const WeeklyRiddleCore = (props: {
           </Row>
           <Row>
             <p>
-              {`You solved this weeks drop in: ${new Date(
+              {`You solved this weeks drop in: ${
+                new Date(new Date().getTime() - 1663257600000).getHours() - 1
+              } hours ${new Date(
                 new Date().getTime() - 1663257600000,
-              ).getMinutes()}`}
+              ).getMinutes()} minutes`}
             </p>
           </Row>
           <Row>
