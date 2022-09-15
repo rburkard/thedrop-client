@@ -12,3 +12,7 @@ export const Objects = [...Array(15)].map((_, idx) => {
   const path = `./icons/Objects${idx + 1}.png`
   return IconFactory(path)
 })
+
+export const EmptyBox = IconFactory('./icons/Objects6.png')
+export const LiveDrop = IconFactory('./icons/Objects9.png')
+export const RewardDrop = IconFactory('./icons/Objects8.png')

@@ -47,3 +47,10 @@ export type DropSolutionT = {
   timestamp: number
   correct: boolean
 }
+
+export enum DropTypeEnum {
+  LiveDrop = 'LiveDrop',
+  BonusCreditsDrop = 'BonusCreditsDrop',
+  RewardDrop = 'RewardDrop',
+  None = 'None',
+}

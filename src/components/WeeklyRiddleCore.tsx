@@ -1,6 +1,8 @@
+import { DropTypeEnum } from 'constants/types'
 import { useEffect, useState } from 'react'
 import Countdown from 'react-countdown'
 import styled from 'styled-components'
+import { PickDropType } from './PickDropType'
 
 enum RiddleState {
   Initial = 'Initial',
@@ -16,6 +18,10 @@ export const WeeklyRiddleCore = (props: {
 }) => {
   const [riddleState, setRiddleState] = useState(RiddleState.Initial)
 
+  const [spinnerEnded, setSpinnerEnded] = useState(false)
+
+  const todayDropTime = 1663257600000
+  // const todayDropTime = 1663254000000
   const [answer, setAnswer] = useState<string>()
   const [correct, setCorrect] = useState()
   const [token, setToken] = useState<string>()
@@ -101,9 +107,9 @@ export const WeeklyRiddleCore = (props: {
 
   switch (riddleState) {
     case RiddleState.Initial:
-      return weeklyRiddle === '' ? (
+      return weeklyRiddle === '' || weeklyRiddle === undefined ? (
         <h3>
-          <Countdown date={1663257600000} onComplete={() => fetchRiddle()} />
+          <Countdown date={todayDropTime} onComplete={() => fetchRiddle()} />
         </h3>
       ) : (
         <div
@@ -111,13 +117,11 @@ export const WeeklyRiddleCore = (props: {
         >
           <Row>
             <h3 style={{ fontWeight: 'bold' }}>Welcome to Week #1</h3>
-            <p>
-              Only 14% of The Drop Players made it this far. But can you keep
-              up?
-            </p>
           </Row>
-          <Row>
-            <p>{weeklyRiddle}</p>
+          <Row
+            style={{ border: '2px solid white', borderRadius: 20, padding: 24 }}
+          >
+            <h3>{weeklyRiddle}</h3>
           </Row>
           <Row>
             <Input
@@ -155,22 +159,22 @@ export const WeeklyRiddleCore = (props: {
       )
 
     case RiddleState.Correct:
-      return (
+      return spinnerEnded ? (
         <>
           <Row>
-            <p>
-              Oooh yeah - well done! This week we don't have a special drop for
-              you, but stay tuned for more!
-            </p>
+            <p>Oooh yeah</p>
           </Row>
           <Row>
-            <p>
-              {`You solved this weeks drop in: ${
-                new Date(new Date().getTime() - 1663257600000).getHours() - 1
+            <p>This weeks drop took you:</p>
+            <h3>
+              {`${
+                new Date(new Date().getTime() - todayDropTime).getHours() - 1
               } hours ${new Date(
-                new Date().getTime() - 1663257600000,
-              ).getMinutes()} minutes`}
-            </p>
+                new Date().getTime() - todayDropTime,
+              ).getMinutes()} minutes and ${new Date(
+                new Date().getTime() - todayDropTime,
+              ).getSeconds()} seconds`}
+            </h3>
           </Row>
           <Row>
             <p>
@@ -188,6 +192,11 @@ export const WeeklyRiddleCore = (props: {
             <h3 style={{ color: 'orange' }}>{token}</h3>
           </Row>
         </>
+      ) : (
+        <PickDropType
+          dropType={DropTypeEnum.None}
+          setSpinnerEnded={setSpinnerEnded}
+        />
       )
 
     case RiddleState.Done:
