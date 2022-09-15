@@ -58,8 +58,8 @@ export const WeeklyRiddleCore = (props: {
   }, [])
 
   useEffect(() => {
-    if (!correct) {
-      setRiddleState(RiddleState.Lost)
+    if (correct === undefined) {
+      setRiddleState(RiddleState.Initial)
     }
     if (correct === true) {
       setRiddleState(RiddleState.Correct)
@@ -198,7 +198,7 @@ export const WeeklyRiddleCore = (props: {
       return (
         <>
           <Row>
-            <p>Well email you, stay tuned!</p>
+            <p>We'll email you, stay tuned!</p>
           </Row>
         </>
       )
