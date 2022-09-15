@@ -239,7 +239,7 @@ export const RiddleCore = (props: {
       return (
         <>
           <Row>
-            <p>Well email you, stay tuned!</p>
+            <p>We'll email you, stay tuned!</p>
           </Row>
         </>
       )
