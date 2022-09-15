@@ -50,7 +50,7 @@ export const LoginTextBox = () => {
       <Overlay>
         <Row>
           <p>
-            Already solved our access initial riddle below? Enter the code you
+            Already solved our access riddle below? Enter the code you
             retrieved.
           </p>
         </Row>
