@@ -20,7 +20,7 @@ export const RiddleTextBox = (props: {
 
 const TextBoxLong = styled.div`
   display: flex;
-  margin: 64px 24px 24px 24px;
+  margin: 64px 24px 80px 24px;
   max-width: 640px;
   position: relative;
   z-index: 3;

@@ -80,7 +80,7 @@ const Wrapper = styled.div`
 
 const Tape = styled.img`
   object-fit: contain;
-  margin-top: 56px;
+  margin-top: 32px;
   width: 280px;
   max-width: '100%';
   z-index: 2;
@@ -96,7 +96,7 @@ const Logo = styled.img`
 const TopoTop = styled.img`
   object-fit: cover;
   object-position: 50% 0;
-  margin: 64px 0px;
+  margin: 0px 0px;
   z-index: 0;
   width: 100%;
 `

@@ -8,17 +8,12 @@ export const IntroTextBox = () => {
       <Overlay>
         <Row>
           <QuestionIcon style={{ width: 80, height: 80 }} />
-          <p>
-            Solve our riddle every Thursday at 18:00 to reveal the drop
-            location.
-          </p>
+          <p>Solve our riddle every Thursday at 18:00.</p>
         </Row>
         <Row>
           <LightningIcon style={{ width: 80, height: 80 }} />
 
-          <p>
-            Beat the other players to the spinner to reveal this weeks reward.
-          </p>
+          <p>Spin the wheel to claim your reward.</p>
         </Row>
       </Overlay>
     </TextBox>
@@ -27,7 +22,7 @@ export const IntroTextBox = () => {
 
 const TextBox = styled.div`
   display: flex;
-  margin: 64px 24px;
+  margin: 40px 24px;
   max-width: 640px;
   position: relative;
   z-index: 3;

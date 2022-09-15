@@ -21,7 +21,7 @@ export const CountdownTextBox = () => {
 
 const TextBox = styled.div`
   display: flex;
-  margin: 80px 24px 64px 24px;
+  margin: 32px 24px 32px 24px;
   max-width: 640px;
   position: relative;
   z-index: 3;
