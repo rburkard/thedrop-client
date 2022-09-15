@@ -188,7 +188,8 @@ export const RiddleCore = (props: {
         <>
           <Row>
             <p>
-              Oooh yeah - Welcome to the club, here is your token for our App
+              Oooh yeah - Welcome to the club, here is your token to access The
+              Drop.
             </p>
           </Row>
           <Row
@@ -202,8 +203,7 @@ export const RiddleCore = (props: {
           </Row>
           <Row>
             <p style={{ marginBottom: 16 }}>
-              Our App is coming next week, follow us on insta for the latest
-              news
+              Stay tuned for the next drop and follow us on insta.
             </p>
             <a href="https://www.instagram.com/thedrop.live/">
               <BsInstagram size={32} />
