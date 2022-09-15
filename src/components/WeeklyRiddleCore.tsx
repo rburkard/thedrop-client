@@ -31,10 +31,6 @@ export const WeeklyRiddleCore = (props: {
 
   const [weeklyRiddle, setWeeklyRiddle] = useState('')
 
-  useEffect(() => {
-    setRiddleState(RiddleState.Initial)
-  }, [])
-
   const fetchRiddle = async () => {
     try {
       const res = await fetch(fetchRiddleUrl, {
