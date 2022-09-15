@@ -165,6 +165,13 @@ export const WeeklyRiddleCore = (props: {
           </Row>
           <Row>
             <p>
+              {`You solved this weeks drop in: ${new Date(
+                new Date().getTime() - 1663257600000,
+              ).getMinutes()}`}
+            </p>
+          </Row>
+          <Row>
+            <p>
               Here is your token to continue your streak and enter next weeks
               drop:
             </p>
