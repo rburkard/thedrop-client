@@ -28,7 +28,7 @@ export const PickDropType = (props: {
     } else {
       runOther()
     }
-  }, [currIconIdx])
+  }, [currIconIdx, count, props])
 
   const Icons = [
     <LiveDrop style={{ width: 320 }} />,
