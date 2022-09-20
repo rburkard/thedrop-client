@@ -20,7 +20,7 @@ export const WeeklyRiddleCore = (props: {
 
   const [spinnerEnded, setSpinnerEnded] = useState(false)
 
-  const todayDropTime = 1663257600000
+  const todayDropTime = 1663862400000
   // const todayDropTime = 1663254000000
   const [answer, setAnswer] = useState<string>()
   const [correct, setCorrect] = useState()
