@@ -11,7 +11,7 @@ export const CountdownTextBox = () => {
         </Row>
         <Row>
           <h3>
-            <Countdown date={1663257600000} />
+            <Countdown date={1663862400000} />
           </h3>
         </Row>
       </Overlay>
