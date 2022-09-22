@@ -116,12 +116,17 @@ export const WeeklyRiddleCore = (props: {
           style={{ display: 'flex', flexDirection: 'column', minHeight: 360 }}
         >
           <Row>
-            <h3 style={{ fontWeight: 'bold' }}>Welcome to Week #1</h3>
+            <h3 style={{ fontWeight: 'bold' }}>Welcome to Week #2</h3>
           </Row>
-          <Row
-            style={{ border: '2px solid white', borderRadius: 20, padding: 24 }}
-          >
+          <Row>
             <h3>{weeklyRiddle}</h3>
+          </Row>
+          <Row>
+            <img
+              src={'./weeklyRiddle/week2.png'}
+              alt={'weekly riddle'}
+              style={{ width: '100%', maxHeight: 400, borderRadius: 10 }}
+            />
           </Row>
           <Row>
             <Input
