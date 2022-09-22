@@ -41,7 +41,7 @@ export const Home = () => {
       )}
       <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
-      <CountdownTextBox />
+      {new Date().getTime() < 1663862400000 && <CountdownTextBox />}
       <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
       <IntroTextBox />
       <LoginTextBox />
