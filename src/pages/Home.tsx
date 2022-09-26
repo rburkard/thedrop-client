@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { AiOutlineClose } from 'react-icons/ai'
 import { LoginTextBox } from 'components/LoginTextBox'
 import { CountdownTextBox } from 'components/CountdownTextBox'
+import { timestampWeekly } from 'constants/variables'
 
 export const Home = () => {
   const [riddleFullscreen, setRiddleFullScreen] = useState(false)
@@ -41,7 +42,7 @@ export const Home = () => {
       )}
       <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
-      {new Date().getTime() < 1663862400000 && <CountdownTextBox />}
+      {new Date().getTime() < timestampWeekly && <CountdownTextBox />}
       <TopoTop src={'./backgroundAssets/topoTop.png'} alt={'topography top'} />
       <IntroTextBox />
       <LoginTextBox />

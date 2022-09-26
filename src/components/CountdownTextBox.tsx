@@ -1,3 +1,4 @@
+import { timestampWeekly } from 'constants/variables'
 import Countdown from 'react-countdown'
 import styled from 'styled-components'
 
@@ -11,7 +12,7 @@ export const CountdownTextBox = () => {
         </Row>
         <Row>
           <h3>
-            <Countdown date={1663862400000} />
+            <Countdown date={timestampWeekly} />
           </h3>
         </Row>
       </Overlay>

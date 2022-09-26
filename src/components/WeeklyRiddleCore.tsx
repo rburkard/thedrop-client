@@ -1,4 +1,5 @@
 import { DropTypeEnum } from 'constants/types'
+import { timestampWeekly } from 'constants/variables'
 import { useEffect, useState } from 'react'
 import Countdown from 'react-countdown'
 import styled from 'styled-components'
@@ -20,7 +21,6 @@ export const WeeklyRiddleCore = (props: {
 
   const [spinnerEnded, setSpinnerEnded] = useState(false)
 
-  const todayDropTime = 1663862400000
   // const todayDropTime = 1663254000000
   const [answer, setAnswer] = useState<string>()
   const [correct, setCorrect] = useState()
@@ -109,7 +109,7 @@ export const WeeklyRiddleCore = (props: {
     case RiddleState.Initial:
       return weeklyRiddle === '' || weeklyRiddle === undefined ? (
         <h3>
-          <Countdown date={todayDropTime} onComplete={() => fetchRiddle()} />
+          <Countdown date={timestampWeekly} onComplete={() => fetchRiddle()} />
         </h3>
       ) : (
         <div
@@ -173,11 +173,11 @@ export const WeeklyRiddleCore = (props: {
             <p>This weeks drop took you:</p>
             <h3>
               {`${
-                new Date(new Date().getTime() - todayDropTime).getHours() - 1
+                new Date(new Date().getTime() - timestampWeekly).getHours() - 1
               } hours ${new Date(
-                new Date().getTime() - todayDropTime,
+                new Date().getTime() - timestampWeekly,
               ).getMinutes()} minutes and ${new Date(
-                new Date().getTime() - todayDropTime,
+                new Date().getTime() - timestampWeekly,
               ).getSeconds()} seconds`}
             </h3>
           </Row>
