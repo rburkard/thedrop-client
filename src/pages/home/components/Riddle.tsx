@@ -15,7 +15,7 @@ export const Riddle = () => {
         <Column key={idx}>
           <ImgWrapper>
             <img
-              src={`./riddle/${item.name}`}
+              src={`./initialRiddle/${item.name}`}
               alt={'riddletag'}
               style={{ objectFit: 'contain', width: '100%' }}
             />

@@ -1,11 +1,11 @@
-import { IntroTextBox } from 'components/IntroTextBox'
-import { Riddle } from 'components/Riddle'
-import { RiddleTextBox } from 'components/RiddleTextBox'
+import { IntroTextBox } from 'pages/home/components/IntroTextBox'
+import { Riddle } from 'pages/home/components/Riddle'
+import { RiddleTextBox } from 'pages/home/components/RiddleTextBox'
 import { Objects } from 'Icons'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineClose } from 'react-icons/ai'
-import { LoginTextBox } from 'components/LoginTextBox'
+import { LoginTextBox } from 'pages/home/components/LoginTextBox'
 import { CountdownTextBox } from 'components/CountdownTextBox'
 import { timestampWeekly } from 'constants/variables'
 
@@ -14,31 +14,12 @@ export const Home = () => {
   return (
     <Wrapper>
       {riddleFullscreen && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'fixed',
-            zIndex: 500,
-            backgroundColor: '#5A5973',
-            height: '100%',
-            width: '100%',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: 20,
-              right: 20,
-              cursor: 'pointer',
-            }}
-            onClick={() => setRiddleFullScreen(false)}
-          >
+        <RiddleFullscreenWrapper>
+          <CloseButtonWrapper onClick={() => setRiddleFullScreen(false)}>
             <AiOutlineClose color={'white'} size={40} />
-          </div>
+          </CloseButtonWrapper>
           <Riddle />
-        </div>
+        </RiddleFullscreenWrapper>
       )}
       <Tape src={'./assets/tape.png'} alt={'welcome sign'} />
       <Logo src={'./assets/logoWithBorder.png'} alt={'the drop logo'} />
@@ -120,4 +101,22 @@ const OverlayIcons = styled.div`
   width: 100%;
   display: flex;
   z-index: 1;
+`
+
+const RiddleFullscreenWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 500;
+  background-color: #5a5973;
+  height: 100%;
+  width: 100%;
+`
+
+const CloseButtonWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
 `

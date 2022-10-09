@@ -4,9 +4,9 @@ import {
   AppThemeContext,
   configureAppTheme,
 } from '@foronered/web/lib/theme/theme'
-import { Home } from 'pages/Home'
+import { Home } from 'pages/home/Home'
 import { Scaffold } from 'Scaffold'
-import { RiddlePage } from 'pages/RiddlePage'
+import { RiddlePage } from 'pages/weeklyRiddle/RiddlePage'
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -78,9 +78,6 @@ export const App = () => {
             <Routes>
               <Route path={'/'} element={<Home />} />
               <Route path={`/3290132262`} element={<RiddlePage />} />
-              {/* <Route path={'/angebot'} element={<Angebot />} />
-              <Route path={'/ueber-uns'} element={<UeberUns />} />
-              <Route path={'/kontakt'} element={<Kontakt />} /> */}
             </Routes>
           </Scaffold>
         </BrowserRouter>

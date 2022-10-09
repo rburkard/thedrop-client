@@ -38,7 +38,7 @@ export const Scaffold = (props: { children: ReactNode }) => {
   return (
     <IsMobile.Provider value={!!isMobile}>
       <Wrapper>
-        <img
+        {/* <img
           src={'./backgroundAssets/paper.png'}
           alt={'background paper'}
           style={{
@@ -55,7 +55,7 @@ export const Scaffold = (props: { children: ReactNode }) => {
             width: '100%',
             objectFit: 'cover',
           }}
-        />
+        /> */}
         <Overlay>{props.children}</Overlay>
       </Wrapper>
     </IsMobile.Provider>

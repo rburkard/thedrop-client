@@ -12,8 +12,7 @@ export const IntroTextBox = () => {
         </Row>
         <Row>
           <LightningIcon style={{ width: 80, height: 80 }} />
-
-          <p>Spin the wheel to claim your reward.</p>
+          <p>Get to the drop location as fast as possible.</p>
         </Row>
       </Overlay>
     </TextBox>

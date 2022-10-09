@@ -1,5 +1,5 @@
-import { Riddle } from 'components/Riddle'
-import { WeeklyRiddleTextBox } from 'components/WeeklyRiddleTextBox'
+import { Riddle } from 'pages/home/components/Riddle'
+import { WeeklyRiddleTextBox } from 'pages/weeklyRiddle/components/WeeklyRiddleTextBox'
 import { Objects } from 'Icons'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'

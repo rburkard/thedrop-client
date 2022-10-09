@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { RiddleCore } from './RiddleCore'
+import { RiddleCore } from './RiddleStates'
 
 export const RiddleTextBox = (props: {
   setRiddleFullscreen: (v: boolean) => void

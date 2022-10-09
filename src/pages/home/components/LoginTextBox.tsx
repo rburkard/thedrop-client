@@ -29,7 +29,6 @@ export const LoginTextBox = () => {
       const json = await res.json()
 
       if (json.correct) {
-        console.log(json)
         localStorage.setItem('dropUrl', json.url)
         navigate(`/${json.url}`)
       } else {
