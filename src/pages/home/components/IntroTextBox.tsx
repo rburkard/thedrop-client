@@ -1,4 +1,4 @@
-import { LightningIcon, QuestionIcon } from 'Icons'
+import { LightningIcon } from 'Icons'
 import styled from 'styled-components'
 
 export const IntroTextBox = () => {
@@ -7,12 +7,8 @@ export const IntroTextBox = () => {
       <TextBoxImg src={'./assets/textBoxBackground.png'} />
       <Overlay>
         <Row>
-          <QuestionIcon style={{ width: 80, height: 80 }} />
-          <p>Solve our riddle every Thursday at 18:00.</p>
-        </Row>
-        <Row>
           <LightningIcon style={{ width: 80, height: 80 }} />
-          <p>Get to the drop location as fast as possible.</p>
+          <p>Under development, we will be back soon with all the news.</p>
         </Row>
       </Overlay>
     </TextBox>

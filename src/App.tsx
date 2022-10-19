@@ -6,7 +6,6 @@ import {
 } from '@foronered/web/lib/theme/theme'
 import { Home } from 'pages/home/Home'
 import { Scaffold } from 'Scaffold'
-import { RiddlePage } from 'pages/weeklyRiddle/RiddlePage'
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -77,7 +76,7 @@ export const App = () => {
           <Scaffold>
             <Routes>
               <Route path={'/'} element={<Home />} />
-              <Route path={`/3290132262`} element={<RiddlePage />} />
+              {/* <Route path={`/3290132262`} element={<RiddlePage />} /> */}
             </Routes>
           </Scaffold>
         </BrowserRouter>
