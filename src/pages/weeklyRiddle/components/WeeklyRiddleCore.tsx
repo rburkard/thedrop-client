@@ -1,3 +1,4 @@
+import { fetchRiddleUrl, submitWeeklyAnswerUrl } from 'constants/envVar'
 import { DropTypeEnum } from 'constants/types'
 import { timestampWeekly } from 'constants/variables'
 import { useEffect, useState } from 'react'
@@ -29,35 +30,29 @@ export const WeeklyRiddleCore = (props: {
 
   const [disabled, setDisabled] = useState(false)
 
-  const fetchRiddleUrl = 'https://romanverse.forone.red/api/get_weekly_riddle'
-  const submitAnswerUrl =
-    'https://romanverse.forone.red/api/post_weekly_solution'
-  // const fetchRiddleUrl = 'http://localhost:3001/api/get_weekly_riddle'
-  // const submitAnswerUrl = 'http://localhost:3001/api/post_weekly_solution'
-
-  const [weeklyRiddle, setWeeklyRiddle] = useState('')
+  const [weeklyRiddle, setWeeklyRiddle] = useState<{
+    text: string
+    url: string
+  }>()
 
   const fetchRiddle = async () => {
+    console.log('fetching')
     try {
       const res = await fetch(fetchRiddleUrl, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ date: '09-10-2022' }),
       })
 
       const json = await res.json()
 
-      if (json.text !== '') {
-        setWeeklyRiddle(json.text)
-      }
+      setWeeklyRiddle({ text: json.text, url: json.imageUrl })
     } catch (err) {
       console.log(err)
     }
   }
-  useEffect(() => {
-    fetchRiddle()
-  }, [])
 
   useEffect(() => {
     if (correct === undefined) {
@@ -70,6 +65,12 @@ export const WeeklyRiddleCore = (props: {
       setRiddleState(RiddleState.Wrong)
     }
   }, [correct, riddleState])
+
+  useEffect(() => {
+    if (!weeklyRiddle) {
+      fetchRiddle()
+    }
+  }, [weeklyRiddle])
 
   useEffect(() => {
     if (riddleState === RiddleState.Wrong && submitCount <= 5) {
@@ -85,7 +86,7 @@ export const WeeklyRiddleCore = (props: {
     setSubmitCount(submitCount + 1)
     setDisabled(true)
     try {
-      const res = await fetch(submitAnswerUrl, {
+      const res = await fetch(submitWeeklyAnswerUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ export const WeeklyRiddleCore = (props: {
 
   switch (riddleState) {
     case RiddleState.Initial:
-      return weeklyRiddle === '' || weeklyRiddle === undefined ? (
+      return !weeklyRiddle ? (
         <h3>
           <Countdown date={timestampWeekly} onComplete={() => fetchRiddle()} />
         </h3>
@@ -119,11 +120,11 @@ export const WeeklyRiddleCore = (props: {
             <h3 style={{ fontWeight: 'bold' }}>Welcome to Week #2</h3>
           </Row>
           <Row>
-            <h3>{weeklyRiddle}</h3>
+            <h3>{weeklyRiddle.text}</h3>
           </Row>
           <Row>
             <img
-              src={'./weeklyRiddle/week2.png'}
+              src={weeklyRiddle.url}
               alt={'weekly riddle'}
               style={{ width: '100%', maxHeight: 400, borderRadius: 10 }}
             />

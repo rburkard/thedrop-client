@@ -1,3 +1,4 @@
+import { postEmailUrl, postSolutionUrl } from 'constants/envVar'
 import { useEffect, useState } from 'react'
 import { BsInstagram } from 'react-icons/bs'
 import { ImEnlarge2 } from 'react-icons/im'
@@ -26,9 +27,6 @@ export const RiddleCore = (props: {
   const [emailSubmitted, setEmailSubmitted] = useState(false)
 
   const [disabled, setDisabled] = useState(false)
-
-  const url = 'https://romanverse.forone.red/api/post_solution'
-  const urlEmail = 'https://romanverse.forone.red/api/post_email'
 
   useEffect(() => {
     if (!correct && emailSubmitted) {
@@ -59,7 +57,7 @@ export const RiddleCore = (props: {
     setSubmitCount(submitCount + 1)
     setDisabled(true)
     try {
-      const res = await fetch(url, {
+      const res = await fetch(postSolutionUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +82,7 @@ export const RiddleCore = (props: {
     setDisabled(true)
     setEmailSubmitted(true)
     try {
-      fetch(urlEmail, {
+      fetch(postEmailUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

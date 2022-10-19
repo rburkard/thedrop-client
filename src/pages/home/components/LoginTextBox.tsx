@@ -1,3 +1,4 @@
+import { initialPassCodeUrl } from 'constants/envVar'
 import { sleep } from 'constants/variables'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
@@ -10,13 +11,10 @@ export const LoginTextBox = () => {
 
   const [disabled, setDisabled] = useState(false)
 
-  const url = 'https://romanverse.forone.red/api/post_initial_passcode'
-  // const url = 'http://localhost:3001/api/post_initial_passcode'
-
   const handleSubmit = async () => {
     setDisabled(true)
     try {
-      const res = await fetch(url, {
+      const res = await fetch(initialPassCodeUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
